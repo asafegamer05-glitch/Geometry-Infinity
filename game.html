@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometry Infinity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="game">
+
+  <!-- ══ HEADER (dark, like Pointercrate) ══ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">GEOMETRY<span>INFINITY</span></div>
+      <div class="header-center">
+        Playing as: <strong id="nick-display">—</strong>
+      </div>
+      <div class="header-right">
+        <span class="turn-badge" id="turn-display">Turn 1 / 30</span>
+        <button id="advance-btn" class="btn-advance" onclick="doAdvanceTurn()">→ Advance Turn</button>
+      </div>
+    </div>
+    <div class="turn-bar-wrap"><div class="turn-bar-fill" id="turn-progress" style="width:0%"></div></div>
+  </header>
+
+  <!-- ══ 4 TABS (Main List / Challenge List / Stats Viewer / Season) ══ -->
+  <div class="tab-bar">
+    <div class="tab-bar-inner">
+      <button class="tab-btn active" onclick="switchTab('list', this)">Main List</button>
+      <button class="tab-btn" onclick="switchTab('challenges', this)">Challenge List</button>
+      <button class="tab-btn" onclick="switchTab('stats', this)">Stats Viewer</button>
+      <button class="tab-btn" onclick="switchTab('season', this)">Season</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE CONTENT ══ -->
+  <div class="page-content">
+
+    <!-- ── TAB 1: Main List ── -->
+    <div id="tab-list" class="tab-pane active">
+      <div class="list-layout">
+
+        <!-- Left: level cards -->
+        <main>
+          <div id="level-list" class="level-list"></div>
+        </main>
+
+        <!-- Right: sidebar (like List Editors / List Helpers) -->
+        <aside class="sidebar">
+
+          <div class="sidebar-box">
+            <div class="sidebar-box-title">Your Profile</div>
+            <div class="sidebar-box-body" id="player-profile"></div>
+          </div>
+
+          <div class="sidebar-box">
+            <div class="sidebar-box-title">House Rules</div>
+            <div class="sidebar-box-body">
+              <div class="rule-notice">
+                Each turn you may use only <strong>10 attempts per level</strong>.
+                Go grind in GD, then come back and log what you did!
+                <br><br>
+                Reaching <strong>51%+</strong> gives you <strong>50%</strong> of the level points!
+              </div>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+
+    <!-- ── TAB 2: Challenge List ── -->
+    <div id="tab-challenges" class="tab-pane">
+      <div class="list-layout">
+        <main>
+          <div id="challenge-list" class="level-list"></div>
+        </main>
+        <aside class="sidebar">
+          <div class="sidebar-box">
+            <div class="sidebar-box-title">Challenge Rules</div>
+            <div class="sidebar-box-body">
+              <div class="rule-notice">
+                <strong>Challenges</strong> are short, intense levels. They cannot be verified or released on turns — they are always available for anyone (you and NPCs) to complete for extra points!
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ── TAB 3: Stats Viewer ── -->
+    <div id="tab-stats" class="tab-pane">
+      <div class="stats-layout">
+        <div class="stats-ranking-panel">
+          <div class="stats-ranking-title">Global Ranking</div>
+          <div class="stats-ranking-list" id="stats-ranking-list"></div>
+        </div>
+        <div class="stats-profile-panel" id="stats-profile-panel">
+          <div style="color:#999;font-size:0.85rem;text-align:center;padding:40px 0">
+            Click a player to view their profile
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB 4: Season ── -->
+    <div id="tab-season" class="tab-pane">
+      <div class="season-layout">
+
+        <div class="season-box">
+          <div class="season-box-title">Season Rules</div>
+          <div class="season-box-body">
+            <ul class="rules-list">
+              <li><strong>30 turns</strong> total — one turn per session</li>
+              <li>Max <strong>10 attempts per level</strong> per turn</li>
+              <li>Reaching <strong>51%</strong> awards <strong>50%</strong> base points for players and NPCs</li>
+              <li>Levels are released over time — harder ones appear first in the list</li>
+              <li>You can <strong>verify a level early</strong> — it enters the list immediately with you as verifier</li>
+              <li>Top 20 simulated players compete automatically each turn</li>
+              <li>Score = level points + low-attempt bonus + challenges</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="season-box">
+          <div class="season-box-title">Upcoming Levels — Verify Early</div>
+          <div class="season-box-body">
+            <div id="upcoming-list" class="upcoming-list"></div>
+            <div id="upcoming-empty" style="display:none;color:#999;font-size:0.82rem;text-align:center;padding:16px 0">
+              All levels are already on the list! 🎉
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Geometry Infinity — Fan-made GD Progress Tracker</span>
+      <button class="btn btn-danger btn-sm" onclick="openResetConfirm()">⚠ Reset Progress</button>
+    </div>
+  </footer>
+
+  <div id="toast-container" class="toast-container"></div>
+
+
+  <!-- ══ MODAL: Log Progress ══ -->
+  <div id="progress-modal" class="modal-overlay" onclick="if(event.target===this)closeProgressModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-level-name">Level</h3>
+        <button class="modal-close" onclick="closeProgressModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-note">
+          ℹ Play in Geometry Dash, then log your session below. This is a tracker — not a GD client!
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-percent">Best % reached (1–100)</label>
+          <input type="number" id="modal-percent" class="form-input" min="1" max="100" placeholder="e.g. 47">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-attempts">Total attempts so far</label>
+          <input type="number" id="modal-attempts" class="form-input" min="1" placeholder="e.g. 312">
+        </div>
+        <div class="form-group">
+          <label class="form-checkbox-label">
+            <input type="checkbox" id="modal-complete" onchange="onCompleteToggle()">
+            <span>I beat this level! ✅</span>
+          </label>
+        </div>
+        <div id="complete-attempts-row" class="form-group" style="display:none">
+          <label class="form-label" for="modal-complete-attempts">Total attempts to complete</label>
+          <input type="number" id="modal-complete-attempts" class="form-input" min="1" placeholder="Final attempt count">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeProgressModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProgress()">Save Progress</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Log Challenge Completion ══ -->
+  <div id="challenge-modal" class="modal-overlay" onclick="if(event.target===this)closeChallengeModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="challenge-modal-title">Challenge</h3>
+        <button class="modal-close" onclick="closeChallengeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-note">
+          ⚡ Log your completion for this challenge. You will receive the challenge points plus bonus for low attempts!
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="challenge-modal-attempts">Total Attempts</label>
+          <input type="number" id="challenge-modal-attempts" class="form-input" min="1" placeholder="e.g. 25"
+                 onkeydown="if(event.key==='Enter') saveChallengeProgress()">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeChallengeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveChallengeProgress()">Save Completion</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Verify Level ══ -->
+  <div id="verify-modal" class="modal-overlay" onclick="if(event.target===this)closeVerifyModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>⭐ Verify Level</h3>
+        <button class="modal-close" onclick="closeVerifyModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="verify-level-name" id="verify-level-name">Level Name</div>
+        <div class="form-note" style="margin-top:12px">
+          You verified this level in GD! It will immediately enter the list, verified by <strong>you</strong>.
+        </div>
+        <div class="form-group" style="margin-top:14px">
+          <label class="form-label" for="verify-attempts">Total attempts to verify</label>
+          <input type="number" id="verify-attempts" class="form-input" min="1" placeholder="e.g. 47"
+                 onkeydown="if(event.key==='Enter') saveVerification()">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeVerifyModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveVerification()">⭐ Verify Level</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Turn Events ══ -->
+  <div id="turn-modal" class="modal-overlay" onclick="if(event.target===this)closeTurnModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="turn-modal-title">Turn Ended</h3>
+        <button class="modal-close" onclick="closeTurnModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="turn-events-title">Events this turn</div>
+        <div id="turn-events" class="turn-events"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="closeTurnModal()">Got it!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Reset Confirm ══ -->
+  <div id="reset-modal" class="modal-overlay" onclick="if(event.target===this)closeResetConfirm()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>⚠ Reset All Progress</h3>
+        <button class="modal-close" onclick="closeResetConfirm()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-warning-text">This will permanently delete <strong>all your progress</strong> — completed levels, attempts, and history.</p>
+        <p class="modal-warning-text">You will return to Turn 0.</p>
+        <p class="modal-warning-text danger-text">This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeResetConfirm()">Cancel</button>
+        <button class="btn btn-danger" onclick="doReset()">Reset Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Game Over ══ -->
+  <div id="gameover-modal" class="modal-overlay">
+    <div class="modal-box modal-gameover">
+      <div class="modal-header gameover-header"><h2>🏁 Season Complete!</h2></div>
+      <div class="modal-body">
+        <div id="go-message" class="go-message">—</div>
+        <div class="go-stats">
+          <div class="go-stat"><div class="go-stat-label">Final Rank</div><div class="go-stat-value accent" id="go-rank">#—</div></div>
+          <div class="go-stat"><div class="go-stat-label">Score</div><div class="go-stat-value" id="go-score">0 pts</div></div>
+          <div class="go-stat"><div class="go-stat-label">Hardest Level</div><div class="go-stat-value" id="go-hardest" style="font-size:0.82rem">—</div></div>
+          <div class="go-stat"><div class="go-stat-label">Completed</div><div class="go-stat-value" id="go-completed">0/7</div></div>
+        </div>
+        <div class="go-ranking-title">Top 10 Final Standings</div>
+        <div id="go-ranking" class="go-ranking"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('gameover-modal').classList.remove('active')">Keep Viewing</button>
+        <button class="btn btn-danger" onclick="doReset()">New Season</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

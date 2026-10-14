@@ -1,0 +1,13 @@
+# Geometry Infinity — Level IDs Configuration
+# Formato: Nome do Nível: ID_NO_JOGO
+# Se você colocar o ID após os dois pontos, ele aparecerá no card do nível no site!
+# Se deixar em branco, não será exibido ID.
+
+Stereo Madness: 
+Back on Track: 
+Polargeist: 
+Dry Out: 
+Base After Base: 
+Can't Let Go: 
+Jumper: 
+level easy:11940 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometry Infinity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="index-body" data-page="index">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">GEOMETRY<span>INFINITY</span></div>
+    </div>
+    <div class="turn-bar-wrap"><div class="turn-bar-fill" style="width:0%"></div></div>
+  </header>
+
+  <main class="index-main">
+
+    <div class="hero-card">
+      <div class="hero-eyebrow">Top Player Simulator</div>
+      <h1 class="hero-title">GEOMETRY <span>INFINITY</span></h1>
+      <p class="hero-desc">
+        Simulate your journey as a Geometry Dash top player.<br>
+        Play the real levels in GD — come back here to log your progress.
+      </p>
+    </div>
+
+    <div id="continue-section" class="continue-card" style="display:none">
+      <div class="continue-info">
+        <div>Continue as <strong id="continue-nick">—</strong></div>
+        <div class="turn-info">Turn <span id="continue-turn">?</span> / 30</div>
+      </div>
+      <div class="continue-btns">
+        <button class="btn btn-primary btn-lg" onclick="continueGame()">▶ Continue</button>
+        <button class="btn btn-ghost" onclick="confirmNewGame()">New Season</button>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-title">Start a New Season</div>
+      <div class="input-group">
+        <label class="input-label" for="nick-input">Your Geometry Dash Username</label>
+        <input type="text" id="nick-input" class="text-input"
+               placeholder="e.g. Riot, Zoink, YourName…"
+               maxlength="20" autocomplete="off" spellcheck="false">
+        <div id="nick-error" class="input-error" style="display:none"></div>
+      </div>
+      <button class="btn btn-primary btn-lg btn-full" onclick="startNewGame()">🚀 Start Season</button>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">🎮</div>
+        <div class="info-title">Play for Real</div>
+        <div class="info-desc">Open Geometry Dash and grind the official levels. Come back here to record your sessions.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📋</div>
+        <div class="info-title">Log Everything</div>
+        <div class="info-desc">Track your best %, attempts, and completions. 10 attempts per level per turn.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🏆</div>
+        <div class="info-title">Beat the Pros</div>
+        <div class="info-desc">Compete against 20 simulated top players across a 30-turn season.</div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"><span>Geometry Infinity — Fan-made GD Progress Tracker</span></div>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+</html>
