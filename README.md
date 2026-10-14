@@ -2,62 +2,62 @@
 
 <p align="center">
   <a href="https://asafegamer05-glitch.github.io/Geometry-Infinity/">
-    <img src="https://img.shields.io/badge/PLAY-GEOMETRY_INFINITY-e94560?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Jogar Geometry Infinity">
+    <img src="https://img.shields.io/badge/PLAY-GEOMETRY_INFINITY-e94560?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Play Geometry Infinity">
   </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/feito%20com-HTML%2C%20CSS%20e%20JavaScript-f06529?style=flat-square" alt="Feito com HTML, CSS e JavaScript">
-  <img src="https://img.shields.io/badge/projeto-single--player-27ae60?style=flat-square" alt="Projeto single-player">
-  <img src="https://img.shields.io/badge/estilo-fan--made-282828?style=flat-square" alt="Projeto de fã">
+  <img src="https://img.shields.io/badge/built%20with-HTML%2C%20CSS%20%26%20JavaScript-f06529?style=flat-square" alt="Built with HTML, CSS, and JavaScript">
+  <img src="https://img.shields.io/badge/mode-single--player-27ae60?style=flat-square" alt="Single-player project">
+  <img src="https://img.shields.io/badge/project-fan--made-282828?style=flat-square" alt="Fan-made project">
 </p>
 
-**Geometry Infinity** e um tracker de progresso single-player inspirado nas listas de dificuldade de Geometry Dash. Monte sua temporada, jogue os niveis no seu proprio Geometry Dash e volte ao site para registrar seus records, completions e verificacoes.
+**Geometry Infinity** is a single-player progress tracker inspired by Geometry Dash difficulty lists. Start a season, play levels in your own copy of Geometry Dash, then come back and log your records, completions, and verifications. 🎮
 
-> Geometry Infinity nao e um cliente de Geometry Dash e nao joga os niveis por voce. A ideia e acompanhar uma jornada ficticia de top player, por diversao.
+> Geometry Infinity is not a Geometry Dash client and does not play levels for you. It is a fun, fictional top-player journey tracker. 🏁
 
-## Visao geral
+## ✨ Features
 
-- Temporada com 30 turnos e progressao de niveis ao longo do tempo.
-- Registro manual de melhor porcentagem, tentativas e conclusoes.
-- Pontos por progresso, completions e tentativas baixas.
-- NPCs simulados que competem na classificacao e avancam a cada turno.
-- Desafios extras sempre disponiveis.
-- Opcao de verificar antecipadamente um nivel que ainda nao entrou na lista.
-- Ranking, perfis, eventos de turno e resumo final da temporada.
-- Salvamento local no navegador, sem conta ou servidor de jogo.
+- 🗓️ A 30-turn season with levels unlocking over time.
+- 📈 Manually log your best percentage, attempts, and completions.
+- 🏆 Earn points for progress, completions, and low-attempt runs.
+- 🤖 Compete with simulated NPCs that progress each turn.
+- ⚡ Take on extra challenges that are always available.
+- ⭐ Verify an upcoming level early to add it to the list.
+- 📊 Explore rankings, player profiles, turn events, and your season recap.
+- 💾 Progress is saved locally in your browser. No account or game server required.
 
-## Imagens dos niveis
+## 🖼️ Level Gallery
 
-As miniaturas abaixo sao os arquivos de imagem usados pelo projeto. No jogo, elas aparecem nos cards dos niveis.
+These are the level thumbnails included with the project and shown on the in-game cards.
 
 <table>
   <tr>
-    <td align="center"><img src="assets/levels/stereo_madness.jpg" alt="Miniatura de Stereo Madness" width="240"><br><strong>Stereo Madness</strong></td>
-    <td align="center"><img src="assets/levels/back_on_track.jpg" alt="Miniatura de Back on Track" width="240"><br><strong>Back on Track</strong></td>
-    <td align="center"><img src="assets/levels/polargeist.jpg" alt="Miniatura de Polargeist" width="240"><br><strong>Polargeist</strong></td>
+    <td align="center"><img src="assets/levels/stereo_madness.jpg" alt="Stereo Madness level thumbnail" width="240"><br><strong>Stereo Madness</strong></td>
+    <td align="center"><img src="assets/levels/back_on_track.jpg" alt="Back on Track level thumbnail" width="240"><br><strong>Back on Track</strong></td>
+    <td align="center"><img src="assets/levels/polargeist.jpg" alt="Polargeist level thumbnail" width="240"><br><strong>Polargeist</strong></td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/levels/dry_out.jpg" alt="Miniatura de Dry Out" width="240"><br><strong>Dry Out</strong></td>
-    <td align="center"><img src="assets/levels/base_after_base.jpg" alt="Miniatura de Base After Base" width="240"><br><strong>Base After Base</strong></td>
-    <td align="center"><img src="assets/levels/cant_let_go.jpg" alt="Miniatura de Can't Let Go" width="240"><br><strong>Can't Let Go</strong></td>
+    <td align="center"><img src="assets/levels/dry_out.jpg" alt="Dry Out level thumbnail" width="240"><br><strong>Dry Out</strong></td>
+    <td align="center"><img src="assets/levels/base_after_base.jpg" alt="Base After Base level thumbnail" width="240"><br><strong>Base After Base</strong></td>
+    <td align="center"><img src="assets/levels/cant_let_go.jpg" alt="Can't Let Go level thumbnail" width="240"><br><strong>Can't Let Go</strong></td>
   </tr>
 </table>
 
-## Como jogar
+## 🕹️ How to Play
 
-1. Abra o [Geometry Infinity](https://asafegamer05-glitch.github.io/Geometry-Infinity/).
-2. Digite seu nome de jogador e inicie uma temporada.
-3. Abra Geometry Dash fora do site e jogue os niveis que estiverem disponiveis.
-4. Volte ao tracker e use **Log Progress** para anotar seu melhor percentual e o total de tentativas. Marque a caixa de conclusao quando vencer o nivel.
-5. Ao terminar sua sessao, avance o turno para atualizar o calendario, os NPCs e os eventos.
-6. Consulte o ranking, os perfis e a aba **Season** para acompanhar a temporada.
+1. Open [Geometry Infinity](https://asafegamer05-glitch.github.io/Geometry-Infinity/).
+2. Enter your player name and start a new season.
+3. Open Geometry Dash separately and play any levels currently available.
+4. Return to the tracker and choose **Log Progress** to enter your best percentage and total attempts. Check the completion box when you beat a level.
+5. When your session is over, advance the turn to update the schedule, NPCs, and events.
+6. Follow the season through the rankings, player profiles, and **Season** tab.
 
-Os registros sao manuais e feitos para uma experiencia casual. O limite de 10 tentativas por nivel em cada turno e uma regra combinada para a brincadeira; o site nao verifica nem bloqueia as tentativas feitas dentro do Geometry Dash.
+Records are entered manually for a casual experience. The limit of 10 attempts per level per turn is a house rule for the fun of it; the website does not check or restrict attempts made in Geometry Dash. ✍️
 
-## Niveis e temporada
+## 📅 Levels & Season
 
-| Nivel | Desbloqueia no turno | Pontos base |
+| Level | Unlock turn | Base points |
 |---|---:|---:|
 | Stereo Madness | 1 | 50 |
 | Back on Track | 5 | 110 |
@@ -67,34 +67,34 @@ Os registros sao manuais e feitos para uma experiencia casual. O limite de 10 te
 | Can't Let Go | 21 | 660 |
 | Jumper | 25 | 900 |
 
-Os niveis aparecem na lista do mais dificil para o mais facil. No turno 27, a simulacao faz um evento especial e coloca **Can't Let Go** acima de **Jumper** na lista.
+Levels are displayed from hardest to easiest. On turn 27, a special simulated event moves **Can't Let Go** above **Jumper** in the list. 🔥
 
-### Pontuacao
+### 💯 Scoring
 
-- Ao alcancar **51% ou mais**, recebe metade dos pontos base do nivel.
-- Ao completar o nivel, recebe os pontos base completos e um bonus baseado no total de tentativas registrado.
-- O bonus de tentativas e maior para conclusoes com menos tentativas: abaixo de 100, abaixo de 300 e abaixo de 1.000 tentativas ha faixas de bonus diferentes.
-- Desafios concedem pontos extras; completar com poucas tentativas tambem pode render bonus.
-- O ranking ordena os participantes pela pontuacao e usa niveis concluidos como desempate.
+- Reaching **51% or higher** awards half of a level's base points.
+- Completing a level awards its full base points plus a bonus based on the recorded attempt count.
+- Lower attempt counts earn larger bonuses, with different tiers below 100, 300, and 1,000 attempts.
+- Challenges award extra points, with a possible low-attempt bonus for player completions.
+- The ranking sorts players by score and uses completed levels as a tiebreaker.
 
-## Os NPCs
+## 🤖 Simulated Players
 
-O ranking inclui 20 jogadores simulados. Cada NPC tem um nivel de habilidade que influencia o progresso, a chance de concluir niveis e a chance de completar desafios. Os resultados sao gerados pelo proprio jogo e podem variar de uma temporada para outra.
+The ranking features 20 simulated players. Each NPC has a skill value that affects progress, level completion chances, and challenge completion chances. Their results are generated by the game and can vary from season to season.
 
-Os nomes sao personagens de simulacao usados para dar contexto ao ranking; o projeto nao consulta resultados oficiais nem se conecta a Geometry Dash.
+These names are part of the simulation. The project does not access official results or connect to Geometry Dash.
 
-## Tecnologias
+## 🧰 Built With
 
-- **HTML** para as paginas e modais.
-- **CSS** para o layout responsivo e os componentes visuais.
-- **JavaScript** sem framework para regras, simulacao, ranking e persistencia.
-- **LocalStorage** para guardar o progresso neste navegador.
+- **HTML** for pages and dialogs.
+- **CSS** for responsive layouts and visual components.
+- **Vanilla JavaScript** for game rules, simulation, rankings, and persistence.
+- **LocalStorage** to save progress in the current browser.
 
-Nao ha etapa de build nem dependencias npm.
+There is no build step and no npm dependency installation required.
 
-## Executar localmente
+## 💻 Run Locally
 
-Clone ou baixe o repositorio e abra `index.html` em um navegador. Para uma experiencia mais consistente, especialmente ao carregar `level_ids.txt`, rode os arquivos por uma extensao de servidor local, como Live Server no VS Code.
+Clone or download the repository, then open `index.html` in a browser. For a more consistent experience, especially when loading `level_ids.txt`, serve the files locally with an extension such as Live Server in VS Code.
 
 ```text
 geometryInfinity/
@@ -107,37 +107,37 @@ geometryInfinity/
     `-- levels/
 ```
 
-## Personalizar
+## 🎨 Customize
 
-- **Niveis, pontos, turnos, NPCs e desafios:** edite as constantes no inicio de `game.js`.
-- **IDs dos niveis:** preencha `level_ids.txt` no formato `Nome do Nivel: ID`. Os IDs tambem podem ser definidos em `GI.LEVEL_IDS`.
-- **Miniaturas:** coloque imagens em `assets/levels/` com o identificador do nivel como nome, por exemplo `stereo_madness.jpg`. O projeto aceita `.png`, `.jpg` e `.jpeg`.
-- **Visual:** altere as variaveis e regras em `style.css`.
+- **Levels, points, turns, NPCs, and challenges:** edit the constants near the top of `game.js`.
+- **Level IDs:** add entries to `level_ids.txt` using `Level Name: ID`. IDs can also be set in `GI.LEVEL_IDS`.
+- **Thumbnails:** add images to `assets/levels/` named after the level ID, such as `stereo_madness.jpg`. The game supports `.png`, `.jpg`, and `.jpeg`.
+- **Visual style:** edit the variables and rules in `style.css`.
 
-Mais detalhes sobre as miniaturas estao em [`assets/levels/README.md`](assets/levels/README.md).
+See [`assets/levels/README.md`](assets/levels/README.md) for more thumbnail details.
 
-## Salvamento e privacidade
+## 🔒 Saves & Privacy
 
-O progresso fica no `localStorage` do navegador, na chave `geometry_infinity_save`. Isso significa que ele nao sincroniza entre navegadores ou dispositivos e pode ser perdido ao limpar os dados do site. Use **Reset Progress** para apagar a temporada atual; iniciar uma nova temporada tambem substitui o progresso salvo.
+Progress is stored in your browser's `localStorage` under the key `geometry_infinity_save`. It does not sync between browsers or devices and may be lost if you clear site data. Use **Reset Progress** to erase the current season; starting a new season also replaces the saved progress.
 
-O projeto nao precisa de cadastro, nao envia os registros para um servidor e nao valida o que acontece dentro do Geometry Dash.
+The project requires no account, does not send records to a server, and does not verify what happens inside Geometry Dash.
 
-## GitHub Pages
+## 🚀 GitHub Pages
 
-O botao **PLAY** no inicio deste README abre a URL publica planejada para o GitHub Pages deste repositorio:
+The **PLAY** badge at the top of this README links to this repository's GitHub Pages URL:
 
 <p align="center">
   <a href="https://asafegamer05-glitch.github.io/Geometry-Infinity/">
-    <img src="https://img.shields.io/badge/ABRIR%20O%20JOGO-CLIQUE%20AQUI-e94560?style=for-the-badge" alt="Abrir Geometry Infinity no GitHub Pages">
+    <img src="https://img.shields.io/badge/OPEN%20THE%20GAME-PLAY%20NOW-e94560?style=for-the-badge" alt="Open Geometry Infinity on GitHub Pages">
   </a>
 </p>
 
-Para publicar pelo GitHub, ative **Settings > Pages** e configure a origem para a branch principal e a pasta raiz (`/`). A pagina pode levar alguns minutos para ficar disponivel apos a publicacao.
+To publish the site, enable **Settings > Pages** and select the `main` branch and root folder (`/`) as the source. It may take a few minutes for the site to become available after publishing. 🌐
 
-## Aviso
+## ⚠️ Disclaimer
 
-Geometry Infinity e um projeto de fã, sem afiliacao com RobTop Games ou com os criadores de Geometry Dash. Geometry Dash e suas marcas pertencem aos respectivos titulares. As imagens presentes no projeto sao miniaturas de niveis usadas como elementos visuais do tracker.
+Geometry Infinity is a fan-made project and is not affiliated with RobTop Games or the creators of Geometry Dash. Geometry Dash and its trademarks belong to their respective owners. The level images included in this project are used as visual thumbnails for the tracker.
 
 ---
 
-Feito para acompanhar uma temporada, registrar records e se divertir.
+Made with lots of ❤️ by asafgamery
