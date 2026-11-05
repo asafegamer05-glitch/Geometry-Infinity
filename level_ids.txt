@@ -1,7 +1,7 @@
 # Geometry Infinity — Level IDs Configuration
-# Formato: Nome do Nível: ID_NO_JOGO
-# Se você colocar o ID após os dois pontos, ele aparecerá no card do nível no site!
-# Se deixar em branco, não será exibido ID.
+# Format: Level Name: IN_GAME_ID
+# If you enter the ID after the colon, it will appear on the level card on the site!
+# If left blank, no ID will be displayed.
 
 Stereo Madness: 
 Back on Track: 
@@ -10,4 +10,19 @@ Dry Out:
 Base After Base: 
 Can't Let Go: 
 Jumper: 
-level easy:11940 
+level easy: 11940
+Dark Paradise: 11280109
+Retray: 6508283
+Dream Land: 150245
+Golden Club: 1446958
+goldenclub: 1446958
+Flappy Hexagon: 1642022
+Stage IX: 977287
+Stereo Madness II: 72462399
+Sonar: 4454123
+Promises: 26618473
+Promisses: 26618473
+Let Me Go: 151862414
+Time Machine: 
+Amplification: 20635816
+First Race: 27483789 

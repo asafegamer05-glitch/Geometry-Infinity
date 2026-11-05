@@ -14,8 +14,10 @@
       <div class="logo">GEOMETRY<span>INFINITY</span></div>
       <div class="header-center">
         Playing as: <strong id="nick-display">—</strong>
+        <span id="header-season-badge" class="turn-badge" style="background:var(--accent);color:#fff;border-color:transparent;margin-left:4px">Season 1</span>
       </div>
       <div class="header-right">
+        <button class="btn-admin-header" onclick="openAdminModal()" title="Developer / Debug Tools">🛠️ Admin</button>
         <span class="turn-badge" id="turn-display">Turn 1 / 30</span>
         <button id="advance-btn" class="btn-advance" onclick="doAdvanceTurn()">→ Advance Turn</button>
       </div>
@@ -29,6 +31,7 @@
       <button class="tab-btn active" onclick="switchTab('list', this)">Main List</button>
       <button class="tab-btn" onclick="switchTab('challenges', this)">Challenge List</button>
       <button class="tab-btn" onclick="switchTab('stats', this)">Stats Viewer</button>
+      <button class="tab-btn" onclick="switchTab('achievements', this)">🏆 Achievements</button>
       <button class="tab-btn" onclick="switchTab('season', this)">Season</button>
     </div>
   </div>
@@ -103,9 +106,40 @@
       </div>
     </div>
 
-    <!-- ── TAB 4: Season ── -->
+    <!-- ── TAB 4: Achievements ── -->
+    <div id="tab-achievements" class="tab-pane">
+      <div class="achievements-container">
+        <div class="achievements-header-box">
+          <div class="achievements-title-row">
+            <h2>🏆 Trophies & Achievements</h2>
+            <div class="achievements-counter-badge" id="achievements-counter">0 / 8 Unlocked</div>
+          </div>
+          <p class="achievements-subtitle">Prove your skills, conquer elite challenges and complete the hardest feats to earn special badges!</p>
+          <div class="achievements-prog-bar-track">
+            <div class="achievements-prog-bar-fill" id="achievements-bar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="achievements-grid" id="achievements-grid"></div>
+      </div>
+    </div>
+
+    <!-- ── TAB 5: Season ── -->
     <div id="tab-season" class="tab-pane">
       <div class="season-layout">
+
+        <div class="season-box custom-level-box">
+          <div class="season-box-title" style="display:flex;justify-content:space-between;align-items:center">
+            <span>✨ Create Custom Level</span>
+            <button class="btn btn-primary btn-sm" onclick="openCustomLevelModal()">+ New Custom Level</button>
+          </div>
+          <div class="season-box-body">
+            <p style="font-size:0.83rem;color:var(--text-sub);margin-bottom:12px;line-height:1.5">
+              Create and add your own level to the list! Set the name, position (can even be <strong>Top 1</strong>!), difficulty, points, and custom image freely.
+            </p>
+            <div id="custom-levels-list" class="custom-levels-list"></div>
+          </div>
+        </div>
 
         <div class="season-box">
           <div class="season-box-title">Season Rules</div>
@@ -116,8 +150,8 @@
               <li>Reaching <strong>51%</strong> awards <strong>50%</strong> base points for players and NPCs</li>
               <li>Levels are released over time — harder ones appear first in the list</li>
               <li>You can <strong>verify a level early</strong> — it enters the list immediately with you as verifier</li>
-              <li>Top 20 simulated players compete automatically each turn</li>
-              <li>Score = level points + low-attempt bonus + challenges</li>
+              <li><strong>Top 1 & Top 2 Elite Rule:</strong> Only the top 5 players can play Top 1 and Top 2 levels! Each turn, roulette selects 2 of the Top 5 to progress (10–20%) on Top 1, and 3 of the Top 5 to progress (17–27%) on Top 2.</li>
+              <li><strong>Turn Focus:</strong> Each NPC can only make progress on at most 1 level per turn.</li>
             </ul>
           </div>
         </div>
@@ -217,8 +251,11 @@
         <button class="modal-close" onclick="closeVerifyModal()">✕</button>
       </div>
       <div class="modal-body">
-        <div class="verify-level-name" id="verify-level-name">Level Name</div>
-        <div class="form-note" style="margin-top:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px">
+          <div class="verify-level-name" id="verify-level-name">Level Name</div>
+          <div id="verify-level-id-display"></div>
+        </div>
+        <div class="form-note" style="margin-top:8px">
           You verified this level in GD! It will immediately enter the list, verified by <strong>you</strong>.
         </div>
         <div class="form-group" style="margin-top:14px">
@@ -226,10 +263,109 @@
           <input type="number" id="verify-attempts" class="form-input" min="1" placeholder="e.g. 47"
                  onkeydown="if(event.key==='Enter') saveVerification()">
         </div>
+        <div class="form-group" style="margin-top:12px" id="verify-pos-group">
+          <label class="form-label" for="verify-pos">Enter at position</label>
+          <select id="verify-pos" class="form-input">
+            <option value="1">👑 Top 1 (Hardest)</option>
+            <option value="2">🥈 Top 2</option>
+            <option value="3">🥉 Top 3</option>
+            <option value="target">📌 Scheduled target position</option>
+          </select>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-ghost" onclick="closeVerifyModal()">Cancel</button>
         <button class="btn btn-primary" onclick="saveVerification()">⭐ Verify Level</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Create Custom Level ══ -->
+  <div id="custom-level-modal" class="modal-overlay" onclick="if(event.target===this)closeCustomLevelModal()">
+    <div class="modal-box modal-custom-level">
+      <div class="modal-header">
+        <h3>✨ Create Custom Level</h3>
+        <button class="modal-close" onclick="closeCustomLevelModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-note">
+          Add your level without restrictions! If you want it to be <strong>Top 1</strong>, simply select that option below.
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cl-name">Level Name *</label>
+          <input type="text" id="cl-name" class="form-input" placeholder="e.g. Acheron, Tidal Wave, My Demon..." maxlength="30">
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="form-group">
+            <label class="form-label" for="cl-diff">Difficulty</label>
+            <select id="cl-diff" class="form-input" onchange="onCustomDiffChange()">
+              <option value="Demon" selected>Demon</option>
+              <option value="Extreme Demon">Extreme Demon</option>
+              <option value="Insane">Insane</option>
+              <option value="Harder">Harder</option>
+              <option value="Hard">Hard</option>
+              <option value="Normal">Normal</option>
+              <option value="Easy">Easy</option>
+              <option value="Auto">Auto</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cl-points">Points on Completion</label>
+            <input type="number" id="cl-points" class="form-input" min="10" max="50000" value="1200" placeholder="e.g. 1200">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:10px">
+          <div class="form-group">
+            <label class="form-label" for="cl-pos-mode">Demonlist Position</label>
+            <select id="cl-pos-mode" class="form-input" onchange="onCustomPosChange()">
+              <option value="top1" selected>👑 Top 1 (#1 Absolute)</option>
+              <option value="top2">🥈 Top 2 (#2 on the List)</option>
+              <option value="top3">🥉 Top 3 (#3 on the List)</option>
+              <option value="bottom">⚡ Bottom of List (Easiest)</option>
+              <option value="custom">⭐ Custom Numerical Rank</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cl-rank">Numerical Rank</label>
+            <input type="number" id="cl-rank" class="form-input" step="0.1" value="100" placeholder="Rank">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="form-group">
+            <label class="form-label" for="cl-verifier">Verifier (Optional)</label>
+            <input type="text" id="cl-verifier" class="form-input" placeholder="Your name or Pro">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cl-game-id">Geometry Dash ID (Optional)</label>
+            <input type="text" id="cl-game-id" class="form-input" placeholder="e.g. 10294821">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Level Image (URL or Upload from Computer)</label>
+          <input type="url" id="cl-img-url" class="form-input" placeholder="https://example.com/thumb.jpg" oninput="onCustomImgUrlChange()" style="margin-bottom:6px">
+          <input type="file" id="cl-img-file" class="form-input" accept="image/*" onchange="onCustomImgFileChange(event)">
+        </div>
+
+        <div class="cl-preview-box" style="display:flex;align-items:center;gap:14px;background:#f9f9f9;border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin-top:4px">
+          <div id="cl-thumb-preview" style="width:110px;height:65px;border-radius:4px;overflow:hidden;position:relative;background:linear-gradient(135deg, #1a0022, #b71c1c);flex-shrink:0">
+            <img id="cl-preview-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none">
+            <div id="cl-preview-badge" class="diff-badge" style="position:absolute;bottom:3px;right:3px;background:rgba(0,0,0,0.7);color:#fff;font-size:0.58rem;font-weight:800;padding:1px 4px;border-radius:2px">DEMON</div>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-sub)">
+            <strong id="cl-preview-title" style="color:var(--text);display:block;font-size:0.9rem">My Level</strong>
+            <span id="cl-preview-meta">Rank: Top 1 · 1200 pts</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeCustomLevelModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveCustomLevel()">🚀 Add to List</button>
       </div>
     </div>
   </div>
@@ -288,6 +424,72 @@
       <div class="modal-footer">
         <button class="btn btn-ghost" onclick="document.getElementById('gameover-modal').classList.remove('active')">Keep Viewing</button>
         <button class="btn btn-danger" onclick="doReset()">New Season</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODAL: Admin / Dev Debug Panel ══ -->
+  <div id="admin-modal" class="modal-overlay" onclick="if(event.target===this)closeAdminModal()">
+    <div class="modal-box modal-admin">
+      <div class="modal-header">
+        <h3>🛠️ Developer / Admin Debug Panel</h3>
+        <button class="modal-close" onclick="closeAdminModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-note">
+          Test any feature, jump turns, clear levels instantly or test achievements without grinding!
+        </div>
+
+        <div class="admin-section">
+          <div class="admin-sec-title">⏱️ Turn Controls</div>
+          <div class="admin-btn-grid">
+            <button class="btn btn-ghost btn-sm" onclick="adminNextTurn()">Advance 1 Turn</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminJumpToTurn(13)">Jump to Turn 13 (Stereo Madness II)</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminJumpToTurn(25)">Jump to Turn 25 (Let Me Go Top 1)</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminJumpToTurn(27)">Jump to Turn 27 (Alpha Trilogy)</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminJumpToTurn(30)">Jump to Turn 30 (Final Turn)</button>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <input type="number" id="admin-turn-input" class="form-input" min="1" max="30" placeholder="Turn # (1-30)" style="max-width:130px">
+            <button class="btn btn-primary btn-sm" onclick="adminSetTurn()">Set Specific Turn</button>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <div class="admin-sec-title">🎮 Instant Level Clear</div>
+          <div class="admin-btn-grid">
+            <button class="btn btn-primary btn-sm" onclick="adminBeatAllLevels()">Beat All Main Levels (100%)</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminBeatCurrentTop1()">Beat Current Top 1</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminBeatCurrentTop3()">Beat Current Top 3</button>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <div class="admin-sec-title">⚡ Challenge Controls</div>
+          <div class="admin-btn-grid">
+            <button class="btn btn-primary btn-sm" onclick="adminBeatAllChallenges()">Beat All Challenges</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminBeatAlphaTrilogy()">Beat Alpha Trilogy (Retray, Dark Paradise, Sonar)</button>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <div class="admin-sec-title">🏆 Achievement Controls</div>
+          <div class="admin-btn-grid">
+            <button class="btn btn-primary btn-sm" onclick="adminUnlockAllAchievements()">Unlock All 9 Achievements</button>
+            <button class="btn btn-danger btn-sm" onclick="adminResetAchievements()">Reset Achievements</button>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <div class="admin-sec-title">💰 Score Boost</div>
+          <div class="admin-btn-grid">
+            <button class="btn btn-ghost btn-sm" onclick="adminAddScore(2500)">+2,500 Score Points</button>
+            <button class="btn btn-ghost btn-sm" onclick="adminAddScore(10000)">+10,000 Score Points</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeAdminModal()">Close</button>
       </div>
     </div>
   </div>

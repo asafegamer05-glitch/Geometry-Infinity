@@ -17,53 +17,189 @@
 
   <main class="index-main">
 
-    <div class="hero-card">
-      <div class="hero-eyebrow">Top Player Simulator</div>
-      <h1 class="hero-title">GEOMETRY <span>INFINITY</span></h1>
-      <p class="hero-desc">
-        Simulate your journey as a Geometry Dash top player.<br>
-        Play the real levels in GD — come back here to log your progress.
-      </p>
+    <!-- ══ MENU BANNER / HERO SECTION ══ -->
+    <div class="menu-container">
+      
+      <div class="menu-banner-wrap">
+        <img id="menu-banner-img" src="assets/levels/stereo_madness.jpg" alt="Menu Cover" class="menu-banner-img">
+        <div class="menu-banner-overlay"></div>
+        <div class="menu-banner-content">
+          <div class="hero-badge-wrap">
+            <span class="hero-pulse-dot"></span>
+            <span class="hero-eyebrow">DEMONLIST SIMULATOR • SEASON MODE</span>
+          </div>
+          <h1 class="hero-title">GEOMETRY <span class="hero-title-accent">INFINITY</span></h1>
+          <p class="hero-desc">
+            Your journey to <strong>Global Top 1</strong>. Play the real levels in Geometry Dash,<br>
+            log your progress each turn, and compete for points against 20 game legends!
+          </p>
+          <div class="hero-features-chips">
+            <span class="chip"><span class="chip-icon">⏱️</span> 30 Turns</span>
+            <span class="chip"><span class="chip-icon">🔥</span> 20 Rival Top Players</span>
+            <span class="chip"><span class="chip-icon">⭐</span> Official Levels + Challenges</span>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm menu-img-btn" onclick="openMenuImageModal()" title="Customize Banner Image">
+          📷 Change Cover
+        </button>
+      </div>
+
+      <!-- ══ CONTINUE CARD (Shown when there is an active save) ══ -->
+      <div id="continue-section" class="continue-card menu-continue-card" style="display:none">
+        <div class="continue-header">
+          <div class="continue-player-avatar">🎮</div>
+          <div class="continue-info">
+            <div class="continue-greeting">Season in Progress</div>
+            <div class="continue-name-row">
+              <strong id="continue-nick" class="continue-nick-text">—</strong>
+              <span id="continue-season-badge" class="continue-badge season-badge">Season 1</span>
+              <span id="continue-rank-badge" class="continue-badge rank-badge">Rank #—</span>
+              <span id="continue-score-badge" class="continue-badge score-badge">0 pts</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="continue-progress-box">
+          <div class="continue-turn-label">
+            <span>Season Progress</span>
+            <span>Turn <strong id="continue-turn">1</strong> / 30</span>
+          </div>
+          <div class="continue-bar-track">
+            <div id="continue-turn-bar" class="continue-bar-fill" style="width: 3.3%"></div>
+          </div>
+        </div>
+
+        <div class="continue-btns">
+          <button class="btn btn-primary btn-lg continue-btn-play" onclick="continueGame()">
+            <span>▶ Continue Season</span>
+          </button>
+          <button class="btn btn-ghost continue-btn-reset" onclick="confirmNewGame()" title="Start from scratch">
+            🔄 New Season
+          </button>
+        </div>
+      </div>
+
+      <!-- ══ NEW SEASON CARD ══ -->
+      <div class="form-card menu-form-card">
+        <div class="form-card-header">
+          <div class="form-card-title">🚀 Start New Season</div>
+          <span class="form-card-subtitle">Choose your season, enter your username and begin!</span>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Select Campaign Season</label>
+          <div class="season-selector-grid">
+            <label class="season-choice-card active" id="season-choice-1" onclick="setSeasonSelection(1)">
+              <input type="radio" name="seasonChoice" value="1" checked style="display:none">
+              <div class="season-choice-top">
+                <span class="season-choice-tag s1">SEASON 1</span>
+                <span class="season-choice-status">Classic</span>
+              </div>
+              <div class="season-choice-title">Stereo to Jumper</div>
+              <div class="season-choice-desc">The original 7 official levels unlocking one-by-one across 30 turns. Ideal for classic GD progression!</div>
+              <div class="season-choice-chips">
+                <span>7 Levels</span> · <span>1 Challenge</span>
+              </div>
+            </label>
+
+            <label class="season-choice-card" id="season-choice-2" onclick="setSeasonSelection(2)">
+              <input type="radio" name="seasonChoice" value="2" style="display:none">
+              <div class="season-choice-top">
+                <span class="season-choice-tag s2">SEASON 2 🔥</span>
+                <span class="season-choice-status s2-status">Expanded</span>
+              </div>
+              <div class="season-choice-title">Demons & Trilogy</div>
+              <div class="season-choice-desc">All S1 levels start unlocked and verified! New demons (Let Me Go, Stereo Madness II...) and the Alpha Trilogy challenges!</div>
+              <div class="season-choice-chips">
+                <span>15 Levels</span> · <span>5 Challenges</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="nick-input">Your Geometry Dash Username</label>
+          <div class="input-with-button">
+            <span class="input-icon">👤</span>
+            <input type="text" id="nick-input" class="text-input modern-input"
+                   placeholder="e.g. Zoink, Riot, Doggie, YourName..."
+                   maxlength="20" autocomplete="off" spellcheck="false">
+            <button type="button" class="btn btn-ghost btn-sm btn-random-nick" onclick="randomizeNick()" title="Randomize Player Name">
+              🎲 Randomize
+            </button>
+          </div>
+          <div id="nick-error" class="input-error" style="display:none"></div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full btn-start-season" onclick="startNewGame()">
+          ⚡ Start Season
+        </button>
+      </div>
+
+      <!-- ══ INFO HIGHLIGHTS ══ -->
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon-wrapper">🎮</div>
+          <div class="info-title">Play in Real GD</div>
+          <div class="info-desc">Open the official game and practice levels. Come back here to log your attempts and % records.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-wrapper">📊</div>
+          <div class="info-title">Dynamic Demonlist</div>
+          <div class="info-desc">10 attempts per level each turn. Consistency bonuses and events that re-rank the list!</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-wrapper">👑</div>
+          <div class="info-title">Reach the Top 5</div>
+          <div class="info-desc">Outperform the simulated legends. Top 1 and Top 2 levels are only unlocked for the elite!</div>
+        </div>
+      </div>
+
     </div>
 
-    <div id="continue-section" class="continue-card" style="display:none">
-      <div class="continue-info">
-        <div>Continue as <strong id="continue-nick">—</strong></div>
-        <div class="turn-info">Turn <span id="continue-turn">?</span> / 30</div>
-      </div>
-      <div class="continue-btns">
-        <button class="btn btn-primary btn-lg" onclick="continueGame()">▶ Continue</button>
-        <button class="btn btn-ghost" onclick="confirmNewGame()">New Season</button>
-      </div>
-    </div>
+    <!-- ══ MODAL: Customize Menu Image ══ -->
+    <div id="menu-image-modal" class="modal-overlay" onclick="if(event.target===this)closeMenuImageModal()">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3>📷 Customize Cover Image</h3>
+          <button class="modal-close" onclick="closeMenuImageModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-note">
+            Choose a quick preset from official levels or enter a custom image via URL or upload!
+          </div>
 
-    <div class="form-card">
-      <div class="form-card-title">Start a New Season</div>
-      <div class="input-group">
-        <label class="input-label" for="nick-input">Your Geometry Dash Username</label>
-        <input type="text" id="nick-input" class="text-input"
-               placeholder="e.g. Riot, Zoink, YourName…"
-               maxlength="20" autocomplete="off" spellcheck="false">
-        <div id="nick-error" class="input-error" style="display:none"></div>
-      </div>
-      <button class="btn btn-primary btn-lg btn-full" onclick="startNewGame()">🚀 Start Season</button>
-    </div>
+          <!-- Quick Presets -->
+          <div class="form-group">
+            <label class="form-label">Choose Official Level</label>
+            <div class="cover-presets-grid">
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/stereo_madness.jpg')">Stereo Madness</button>
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/back_on_track.jpg')">Back on Track</button>
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/polargeist.jpg')">Polargeist</button>
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/dry_out.jpg')">Dry Out</button>
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/base_after_base.jpg')">Base After Base</button>
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/cant_let_go.jpg')">Can't Let Go</button>
+              <button type="button" class="preset-btn" onclick="setPresetCover('assets/levels/jumper.jpg')">Jumper</button>
+            </div>
+          </div>
 
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-icon">🎮</div>
-        <div class="info-title">Play for Real</div>
-        <div class="info-desc">Open Geometry Dash and grind the official levels. Come back here to record your sessions.</div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">📋</div>
-        <div class="info-title">Log Everything</div>
-        <div class="info-desc">Track your best %, attempts, and completions. 10 attempts per level per turn.</div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🏆</div>
-        <div class="info-title">Beat the Pros</div>
-        <div class="info-desc">Compete against 20 simulated top players across a 30-turn season.</div>
+          <div class="form-group">
+            <label class="form-label" for="menu-img-url-input">Or Web Image URL</label>
+            <input type="url" id="menu-img-url-input" class="form-input" placeholder="https://example.com/image.png" oninput="previewMenuImageUrl(this.value)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Or Upload from Computer</label>
+            <input type="file" id="menu-img-file-input" class="form-input" accept="image/*" onchange="previewMenuImageFile(event)">
+          </div>
+          <div class="menu-preview-wrap">
+            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px">Cover Preview:</div>
+            <img id="menu-img-preview" src="assets/levels/stereo_madness.jpg" alt="Preview" style="max-width:100%;max-height:140px;border-radius:6px;object-fit:cover;border:1px solid var(--border)">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost" onclick="resetMenuImageDefault()">Default</button>
+          <button class="btn btn-ghost" onclick="closeMenuImageModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="saveMenuImage()">Save Cover</button>
+        </div>
       </div>
     </div>
 
